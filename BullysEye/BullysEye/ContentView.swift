@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var alertIsVisible = false
+    @State private var whosThereIsVisible: Bool = false
     var body: some View {
         VStack {
             VStack {
@@ -30,7 +32,23 @@ struct ContentView: View {
                     .bold()
             }
             Button("Hit me") {
+                self.alertIsVisible = true
             }
+            .alert("Hello, There!", isPresented: $alertIsVisible) {
+                Button("Awesome") { }
+            } message: {
+                Text("This is the first pop-up")
+            }
+
+            Button("Knock Knock") {
+                self.whosThereIsVisible = true
+            }
+            .alert("Whos's There?", isPresented: $whosThereIsVisible) {
+                Button("Little old lady who?") { }
+            } message: {
+                Text("Little old lady")
+            }
+
         }
     }
 }
